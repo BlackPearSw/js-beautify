@@ -37,6 +37,16 @@ var line_starters = require('./tokenizer').line_starters;
 var positionable_operators = require('./tokenizer').positionable_operators;
 var TOKEN = require('./tokenizer').TOKEN;
 
+var MODE = {
+  BlockStatement: 'BlockStatement', // 'BLOCK'
+  Statement: 'Statement', // 'STATEMENT'
+  ObjectLiteral: 'ObjectLiteral', // 'OBJECT',
+  ArrayLiteral: 'ArrayLiteral', //'[EXPRESSION]',
+  ForInitializer: 'ForInitializer', //'(FOR-EXPRESSION)',
+  Conditional: 'Conditional', //'(COND-EXPRESSION)',
+  Expression: 'Expression' //'(EXPRESSION)'
+};
+
 function remove_redundant_indentation(output, frame) {
   // This implementation is effective but has some issues:
   //     - can cause line wrap to happen too soon due to indent removal
@@ -86,16 +96,6 @@ var validPositionValues = ['before-newline', 'after-newline', 'preserve-newline'
 var OPERATOR_POSITION = generateMapFromStrings(validPositionValues);
 
 var OPERATOR_POSITION_BEFORE_OR_PRESERVE = [OPERATOR_POSITION.before_newline, OPERATOR_POSITION.preserve_newline];
-
-var MODE = {
-  BlockStatement: 'BlockStatement', // 'BLOCK'
-  Statement: 'Statement', // 'STATEMENT'
-  ObjectLiteral: 'ObjectLiteral', // 'OBJECT',
-  ArrayLiteral: 'ArrayLiteral', //'[EXPRESSION]',
-  ForInitializer: 'ForInitializer', //'(FOR-EXPRESSION)',
-  Conditional: 'Conditional', //'(COND-EXPRESSION)',
-  Expression: 'Expression' //'(EXPRESSION)'
-};
 
 // we could use just string.split, but
 // IE doesn't like returning empty strings
