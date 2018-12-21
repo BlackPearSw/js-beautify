@@ -1,5 +1,7 @@
 {
   "name": "js-beautify",
+  "version": "1.18.11",
+  "description": "Black Pear fork of js-beautifier",
   "main": [
     "./js/lib/beautify.js",
     "./js/lib/beautify-css.js",
